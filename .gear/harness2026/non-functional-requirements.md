@@ -1,17 +1,17 @@
-# 非機能要件一覧
+# Danh sách yêu cầu phi chức năng
 
-| id | category | requirement | targetValue | priority |
+| id | Danh mục | Yêu cầu | Giá trị mục tiêu | Độ ưu tiên |
 | --- | --- | --- | --- | --- |
-| NFR-001 | 可用性 | システム稼働時間（サービスアベイラビリティ） | 年間稼働率 99.5% 以上（定期メンテナンス時間を除く）。特にマッチング締め切り前1週間は無停止（※要確認：大学の講義スケジュールに依存するため、サービス停止許容時間に関する運用ルールの確認が必要）。 | 高 |
-| NFR-002 | 可用性 | データバックアップと目標復旧時点 | 毎日1回の自動フルバックアップ（世代管理は30日間）。災害時や障害時のRTO（目標復旧時間）24時間以内、RPO（目標復旧時点）24時間以内。 | 高 |
-| NFR-003 | 性能 | 一般画面のレスポンスタイム | ログイン、プロフィール編集、プロジェクト検索などの通常画面移動における平均応答時間が2.0秒以内（ピーク時でも3.0秒以内）。 | 高 |
-| NFR-004 | 性能 | AI推薦処理の応答時間 | AI候補メンバー/プロジェクト推薦処理（FR-011, FR-012）の処理時間が5.0秒以内（※要確認：AIモデルの計算量、外部API利用、またはバッチ処理でのプレ計算採用など、技術制約の定義が必要）。 | 中 |
-| NFR-005 | 性能 | 同時接続ユーザー数（耐荷重性） | 本講義の同時受講想定数をカバーする、最大1,000アクティブユーザーの同時接続時においてエラーを発生させずに処理を継続できること（※要確認：本学の同時受講学生・クラス数の最大規模）。 | 中 |
-| NFR-006 | セキュリティ | ユーザー認証・アクセス権限制御 | パスワード複雑性（英数記号8文字以上）の適用。学生アカウントと教員・管理者アカウントでの厳格なロールベースアクセス制御（RBAC）の実施。 | 高 |
-| NFR-007 | セキュリティ | 通信およびデータの暗号化保護 | 常時HTTPS通信（TLS 1.2以上、推奨1.3）の適用。DB内の学生個人情報（氏名、学籍番号、連絡先等）およびログインパスワード（ソルト付ハッシュ化）の暗号化保管。 | 高 |
-| NFR-008 | セキュリティ | 外部シングルサインオン（SSO）連携規格への準拠 | 将来的な学内共通認証（Shibboleth、SAML2.0、OpenID Connect等）との統合を想定したセキュリティ認証インターフェースの互換性確保（※要確認：初期はローカル認証を想定、既存認証システムとの連携要件は未定義）。 | 中 |
-| NFR-009 | 運用 | システム監視および障害アラート通知 | インフラおよびアプリケーションの24時間365日の死活監視。CPU/メモリ使用率が80%を継続して超過した場合、または重大なサーバーエラー発生時に、運営者へリアルタイム通知（メール/Slack等）する体制。 | 高 |
-| NFR-010 | 運用 | データの長期保持とクリーンアップ | 学期末データアーカイブ時、成績評価や履歴確認のため過去の結成データを読み取り専用で5年間保管する（※要確認：大学のアカデミックデータに関するライフサイクルポリシー）。 | 中 |
-| NFR-011 | 移行 | 旧システム等からの既存データ移行 | 「未定義」（※要確認：移行元となる既存マッチングシステムや過去ログの有無。新規登録時はFR-029のCSVインポートのみで対応を想定）。 | 低 |
-| NFR-012 | 拡張性 | LMS等の外部システムとのAPI連携 | 将来的にMoodleやCanvas等の学習管理システム（LMS）とデータ接続が容易に行えるよう、マッチングデータや学生情報を標準的なREST APIで抽出可能とする疎結合なシステム設計（※要確認：LMS側API仕様の詳細）。 | 中 |
-| NFR-013 | 拡張性 | クラウドインフラの自動スケーリング | マッチング期限直前などのトラフィック集中時において、サーバーのリソース負荷に応じてWebアプリケーションのインスタンスが自動でスケールアウト・インするクラウド（AWS/Azure等）アーキテクチャの採用（※要確認：クラウドサービス利用に関する技術制約）。 | 高 |
+| NFR-001 | Tính khả dụng | Thời gian hoạt động hệ thống (Service Availability) | Tỷ lệ hoạt động hàng năm từ 99.5% trở lên (không tính thời gian bảo trì định kỳ). Đặc biệt không dừng hoạt động trong vòng 1 tuần trước hạn chót ghép cặp (※ Cần xác nhận: Do phụ thuộc vào lịch học của trường đại học, cần xác nhận quy tắc vận hành liên quan đến thời gian ngừng dịch vụ cho phép). | Cao |
+| NFR-002 | Tính khả dụng | Sao lưu dữ liệu và Mục tiêu điểm phục hồi | Tự động sao lưu toàn bộ (full backup) mỗi ngày một lần (quản lý phiên bản lưu trữ trong 30 ngày). RTO (Mục tiêu thời gian phục hồi) khi xảy ra thảm họa hoặc sự cố trong vòng 24 giờ, RPO (Mục tiêu điểm phục hồi) trong vòng 24 giờ. | Cao |
+| NFR-003 | Hiệu năng | Thời gian phản hồi của màn hình thông thường | Thời gian phản hồi trung bình khi di chuyển giữa các màn hình thông thường như đăng nhập, chỉnh sửa hồ sơ cá nhân, tìm kiếm dự án là dưới 2.0 giây (ngay cả thời gian cao điểm cũng dưới 3.0 giây). | Cao |
+| NFR-004 | Hiệu năng | Thời gian phản hồi của xử lý gợi ý bằng AI | Thời gian xử lý gợi ý thành viên/dự án tiềm năng bằng AI (FR-011, FR-012) dưới 5.0 giây (※ Cần xác nhận: Cần định nghĩa các ràng buộc kỹ thuật như khối lượng tính toán của mô hình AI, việc sử dụng API bên ngoài hoặc áp dụng tính toán trước qua xử lý hàng loạt - batch processing). | Trung bình |
+| NFR-005 | Hiệu năng | Số lượng người dùng kết nối đồng thời (Khả năng chịu tải) | Có khả năng tiếp tục xử lý mà không phát sinh lỗi khi có tối đa 1.000 người dùng hoạt động (active user) kết nối đồng thời, đáp ứng số lượng học viên dự kiến học đồng thời của môn học này (※ Cần xác nhận: Quy mô tối đa về số lượng sinh viên và số lớp học đồng thời của trường này). | Trung bình |
+| NFR-006 | Bảo mật | Xác thực người dùng và Kiểm soát quyền truy cập | Áp dụng độ phức tạp của mật khẩu (tối thiểu 8 ký tự bao gồm chữ cái, chữ số và ký tự đặc biệt). Thực hiện kiểm soát truy cập dựa trên vai trò (RBAC) một cách nghiêm ngặt giữa tài khoản sinh viên và tài khoản giảng viên/quản trị viên. | Cao |
+| NFR-007 | Bảo mật | Mã hóa bảo vệ truyền thông và dữ liệu | Áp dụng giao tiếp HTTPS mọi lúc (TLS 1.2 trở lên, khuyến nghị 1.3). Lưu trữ mã hóa thông tin cá nhân của sinh viên trong DB (họ tên, mã số sinh viên, thông tin liên lạc, v.v.) và mật khẩu đăng nhập (băm kèm muối - salted hash). | Cao |
+| NFR-008 | Bảo mật | Tuân thủ các tiêu chuẩn liên kết Đăng nhập một lần (SSO) bên ngoài | Đảm bảo khả năng tương thích của giao diện xác thực bảo mật hướng tới tích hợp với hệ thống xác thực chung của trường trong tương lai (Shibboleth, SAML2.0, OpenID Connect, v.v.) (※ Cần xác nhận: Ban đầu giả định sử dụng xác thực nội bộ - local auth, yêu cầu liên kết với hệ thống xác thực hiện tại chưa được định nghĩa). | Trung bình |
+| NFR-009 | Vận hành | Giám sát hệ thống và Thông báo cảnh báo sự cố | Giám sát hoạt động (liveness check) 24/7 đối với hạ tầng và ứng dụng. Thiết lập hệ thống thông báo thời gian thực (qua Email/Slack, v.v.) cho đơn vị vận hành khi tỷ lệ sử dụng CPU/Memory vượt quá 80% liên tục, hoặc khi xảy ra lỗi máy chủ nghiêm trọng. | Cao |
+| NFR-010 | Vận hành | Lưu trữ dữ liệu dài hạn và Dọn dẹp | Khi lưu trữ (archive) dữ liệu cuối học kỳ, thông tin kết đội trong quá khứ sẽ được lưu trữ dưới dạng chỉ đọc trong 5 năm để phục vụ đánh giá điểm số hoặc kiểm tra lịch sử (※ Cần xác nhận: Chính sách vòng đời liên quan đến dữ liệu học thuật của trường đại học). | Trung bình |
+| NFR-011 | Di trú | Di trú dữ liệu hiện có từ hệ thống cũ | "Chưa định nghĩa" (※ Cần xác nhận: Sự tồn tại của hệ thống ghép cặp cũ hoặc nhật ký lịch sử cần di trú. Giả định ban đầu khi đăng ký mới chỉ cần hỗ trợ nhập dữ liệu qua CSV của FR-029). | Thấp |
+| NFR-012 | Khả năng mở rộng | Liên kết API với các hệ thống bên ngoài như LMS | Thiết kế hệ thống lỏng lẻo (loose coupling) cho phép trích xuất dữ liệu ghép cặp và thông tin sinh viên thông qua các REST API tiêu chuẩn, nhằm giúp việc kết nối dữ liệu với các hệ thống quản lý học tập (LMS) như Moodle hay Canvas dễ dàng hơn trong tương lai (※ Cần xác nhận: Chi tiết đặc tả API phía LMS). | Trung bình |
+| NFR-013 | Khả năng mở rộng | Tự động co giãn (Auto-scaling) hạ tầng đám mây | Áp dụng kiến trúc đám mây (AWS/Azure, v.v.) cho phép các thực thể (instance) ứng dụng Web tự động scale-out/in theo tải tài nguyên của máy chủ vào những thời điểm tập trung lưu lượng truy cập cao như ngay trước hạn chót ghép cặp (※ Cần xác nhận: Ràng buộc kỹ thuật liên quan đến việc sử dụng dịch vụ đám mây). | Cao |
